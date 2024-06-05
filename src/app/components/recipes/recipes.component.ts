@@ -15,12 +15,16 @@ export class RecipesComponent implements OnInit {
   itemCount=8;
   items=new Array(this.itemCount);
 
-  recipes:any=[];
+  recipes=[];
 
   constructor(private recipeService:RecipeService){}
   
   ngOnInit(): void {
-    this.recipeService.getRecipes("").subscribe(rec=>this.recipes.push(rec.meals[0]));
+    this.recipeService.getRecipes("").subscribe(data=>{
+      this.recipes=data.meals;
+    });
   }
 
 }
+
+
