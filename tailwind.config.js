@@ -7,6 +7,7 @@ module.exports = {
   theme: {
     extend: {},
   },
+  darkMode: 'media',
   plugins: [
     require('flowbite/plugin')
   ],

@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RecipesComponent {
 
-  itemCount=6;
+  itemCount=8;
   items=new Array(this.itemCount);
 
 }
