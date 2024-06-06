@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RecipeItemComponent } from '../recipe-item/recipe-item.component';
 import { CommonModule } from '@angular/common';
 import { RecipeService } from '../../services/recipe.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-recipes',
@@ -11,16 +12,21 @@ import { RecipeService } from '../../services/recipe.service';
   styleUrl: './recipes.component.css'
 })
 export class RecipesComponent implements OnInit {
-  
-  itemCount=8;
-  items=new Array(this.itemCount);
+ 
+  searchMsg:any="";
 
   recipes=[];
 
-  constructor(private recipeService:RecipeService){}
+  constructor(private recipeService:RecipeService,private searchService:SearchService){
+    this.searchService.getSearchText().subscribe(value=>{
+      this.recipeService.getRecipes(value).subscribe(data=>{
+        this.recipes=data.meals;
+      });
+    }) 
+   }
   
   ngOnInit(): void {
-    this.recipeService.getRecipes("").subscribe(data=>{
+    this.recipeService.getRecipes(this.searchMsg).subscribe(data=>{
       this.recipes=data.meals;
     });
   }
